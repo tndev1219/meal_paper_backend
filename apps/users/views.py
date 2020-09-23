@@ -124,12 +124,12 @@ class ForgotPasswordAPIView(APIView):
         try:
             serializer = self.serializer_class(data=request.data)
             serializer.is_valid(raise_exception=True)
-            serializer.send_mail(request.data)
+            reset_key = serializer.send_mail(request.data)
             return JsonResponse(
                 {
                     'success': True,
                     'message': 'Success',
-                    'result': serializer.data,
+                    'result': reset_key,
                 }, status=status.HTTP_200_OK)
         except Exception as e:
             print('Forgot Password Error: ', e)

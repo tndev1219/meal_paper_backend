@@ -3,7 +3,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from rest_framework import serializers
 
-from apps.property.models import Agency, Salutarium, Paper
+from apps.property.models import Agency, Salutarium, Paper, DeviceToken
 from apps.users.models import User
 from mealpaper.settings.base import SENDER_EMAIL
 
@@ -41,3 +41,22 @@ class PaperSerializer(serializers.ModelSerializer):
     class Meta:
         model = Paper
         fields = '__all__'
+
+class DeviceTokenSerializer(serializers.ModelSerializer):
+    salutarium = serializers.PrimaryKeyRelatedField(
+        queryset=Salutarium.objects.all(),
+        required=True,
+        allow_null=False
+    )
+    role = serializers.IntegerField(required=True, allow_null=False)
+    token = serializers.CharField(required=True, allow_null=False)
+
+    class Meta:
+        model = DeviceToken
+        fields = [
+            'id',
+            'user',
+            'salutarium',
+            'role',
+            'token'
+        ]

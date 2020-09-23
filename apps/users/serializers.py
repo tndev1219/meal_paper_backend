@@ -61,6 +61,8 @@ class ForgotPasswordSerializer(serializers.Serializer):
         msg.send()
 
         user.save()
+        
+        return user.reset_key
 
     def validate(self, data):
         self.check_email(data['email'])

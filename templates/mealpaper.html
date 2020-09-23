@@ -1,0 +1,316 @@
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <style>
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+      margin-top: 0in;
+      margin-right: 0in;
+      margin-bottom: 8.0pt;
+      margin-left: 0in;
+      line-height: 107%;
+      font-size: 11.0pt;
+    }
+
+    @page WordSection1 {
+      size: 8.5in 11.0in;
+      margin: 1.0in 1.0in 1.0in 1.0in;
+      mso-header-margin: .5in;
+      mso-footer-margin: .5in;
+      mso-paper-source: 0;
+    }
+
+    @font-face {
+      font-family: TogoshiGothic;
+      src: url("/var/www/mealpaper/api/templates/togoshi-gothic.ttf");
+    }
+
+    body {
+      font-family: TogoshiGothic;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class=WordSection1>
+
+    <p class=MsoNormal style='text-align:center'>
+      <b><span style='font-size:14.0pt;line-height:107%;'>食事箋</span></b>
+      <span>&nbsp;</span>
+      <span>(<span>カルテ控</span>)</span>
+    </p>
+
+    <p class=MsoNormal style='margin-bottom:0in'>
+      <span>記入日 : {{register_era}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span>{{register_era_year}}<span>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{register_month}}<span>月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        {{register_day}}<span>日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;記入者: {{registerer_name}}</span>
+      </span>
+    </p>
+
+    <table cellspacing=0 cellpadding=0 width=622 style='width:466.5pt;border-collapse:collapse;border:none;'>
+      <tr style='height:26pt'>
+        <td width=311 colspan=4
+          style='width:232.8pt;border:solid windowtext 1.5pt;border-bottom:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:26pt'>
+          <p class=MsoNormal style='margin-bottom:0in;line-height:normal'>
+            <span>ふりがな</span></p>
+        </td>
+        <td width=311 colspan=6
+          style='width:233.7pt;border-top:solid windowtext 1.5pt;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:26pt'>
+          <p class=MsoNormal style='margin-bottom:0in;line-height:normal'>
+            <span>生年月日</span></p>
+        </td>
+      </tr>
+      <tr style='height:30pt'>
+        <td width=310 colspan=4 rowspan=3 valign=top
+          style='width:232.8pt;border:solid windowtext 1.5pt;border-top:none;padding:0in 5.4pt 0in 5.4pt;height:30pt'>
+          <p class=MsoNormal style='margin-bottom:0in;line-height:normal;padding-top: 10pt;'><span>氏名</span></p>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>{{patient_name}}</span></p>
+        </td>
+        <td width=312 colspan=6
+          style='width:233.7pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:30pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>{{patient_era}}&nbsp;&nbsp;&nbsp;&nbsp;{{patient_era_year}}</span><span>年&nbsp;&nbsp;&nbsp;&nbsp;</span><span>{{patient_month}}<span>月
+                &nbsp;&nbsp;&nbsp;&nbsp;</span>{{patient_day}}<span>日</span>
+            </span></p>
+        </td>
+      </tr>
+      <tr style='height:26pt'>
+        <td width=161 colspan=4
+          style='width:120.45pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:26pt'>
+          <p class=MsoNormal style='margin-bottom:0in;line-height:normal'><span>性別</span></p>
+        </td>
+        <td width=151 colspan=2
+          style='width:113.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:26pt'>
+          <p class=MsoNormal style='margin-bottom:0in;line-height:normal'><span>年齢</span></p>
+        </td>
+      </tr>
+      <tr style='height:30pt'>
+        <td width=161 colspan=4 rowspan=2
+          style='width:120.45pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:30pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>{{patient_gender}}</span></p>
+        </td>
+        <td width=151 colspan=2 rowspan=2
+          style='width:113.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:30pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:right;line-height:normal'>
+            <span>{{patient_age}}歳</span></p>
+        </td>
+      </tr>
+      <tr style='height:26pt'>
+        <td width=310 colspan=4
+          style='width:232.8pt;border-top:none;border-left:solid windowtext 1.5pt;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:26pt'>
+          <p class=MsoNormal style='margin-bottom:0in;line-height:normal'>
+            <span>ユニット名</span></p>
+        </td>
+      </tr>
+      <tr style='height:26pt'>
+        <td width=310 colspan=4 rowspan=2
+          style='width:232.8pt;border:solid windowtext 1.5pt;border-top:none; padding:0in 5.4pt 0in 5.4pt;height:26pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>{{patient_unit_layer}}階&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;{{patient_unit_direction}}</span></p>
+        </td>
+        <td width=161 colspan=4
+          style='width:120.45pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:26pt'>
+          <p class=MsoNormal style='margin-bottom:0in;line-height:normal'><span>身長</span></p>
+        </td>
+        <td width=151 colspan=2
+          style='width:113.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:26pt'>
+          <p class=MsoNormal style='margin-bottom:0in;line-height:normal'><span>体重</span></p>
+        </td>
+      </tr>
+      <tr style='height:30pt'>
+        <td width=161 colspan=4
+          style='width:120.45pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:30pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:right;line-height:normal'><span>{{patient_height}}cm</span></p>
+        </td>
+        <td width=151 colspan=2
+          style='width:113.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:30pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:right;line-height:normal'><span>{{patient_weight}}kg</span></p>
+        </td>
+      </tr>
+      <tr style='height:26pt'>
+        <td width=310 colspan=4
+          style='width:232.8pt;border-top:none;border-left:solid windowtext 1.5pt;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:26pt'>
+          <p class=MsoNormal style='margin-bottom:0in;line-height:normal'><span>病名</span></p>
+        </td>
+        <td width=108 colspan=2
+          style='width:81.1pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:26pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>医師</span></p>
+        </td>
+        <td width=102 colspan=3
+          style='width:76.5pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:26pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>看護師</span></p>
+        </td>
+        <td width=101
+          style='width:76.1pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:26pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>栄養士</span></p>
+        </td>
+      </tr>
+      <tr style='height:55.75pt'>
+        <td width=310 colspan=4
+          style='width:232.8pt;border:solid windowtext 1.5pt;border-top:none; padding:0in 5.4pt 0in 5.4pt;height:55.75pt'>
+          <p class=MsoNormal style='margin-bottom:0in;line-height:normal'>
+            <span>{{patient_disease}}</span></p>
+        </td>
+        <td width=108 colspan=2
+          style='width:81.1pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:55.75pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'><span></span></p>
+        </td>
+        <td width=102 colspan=3
+          style='width:76.5pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:55.75pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'><span></span></p>
+        </td>
+        <td width=101
+          style='width:76.1pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:55.75pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'><span></span></p>
+        </td>
+      </tr>
+      <tr style='height:35pt'>
+        <td width=62
+          style='width:46.5pt;border-top:none;border-left:solid windowtext 1.5pt;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:35pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>区分</span></p>
+        </td>
+        <td width=136
+          style='width:102.2pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:35pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>{{period}}</span></p>
+        </td>
+        <td width=78
+          style='width:58.85pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:35pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>変更理由</span></p>
+        </td>
+        <td width=345 colspan=7
+          style='width:258.95pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:35pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>{{reason}}</span></p>
+        </td>
+      </tr>
+      <tr style='height:26pt'>
+        <td width=62 rowspan=2
+          style='width:46.5pt;border-top:none;border-left:solid windowtext 1.5pt;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:26pt'>
+          <p class=MsoNormal
+            style='margin-top:0in;margin-right:5.65pt;margin-bottom:0in;margin-left:5.65pt;text-align:center;line-height:normal'>
+            <span>年月日</span></p>
+        </td>
+        <td width=248 colspan=3
+          style='width:186.3pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:26pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>{{start_date_era}}&nbsp;&nbsp;</span><span>{{start_date_era_year}}<span>年&nbsp;&nbsp;</span>{{start_date_month}}<span>月&nbsp;&nbsp;</span>{{start_date_day}}日</span></p>
+        </td>
+        <td width=312 colspan=6
+          style='width:233.7pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:26pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>{{end_date_era}}&nbsp;&nbsp;</span><span>{{end_date_era_year}}<span>年&nbsp;&nbsp;</span>{{end_date_month}}<span>月&nbsp;&nbsp;</span>{{end_date_day}}日</span></p>
+        </td>
+      </tr>
+      <tr style='height:36.9pt'>
+        <td width=248 colspan=3
+          style='width:186.3pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:36.9pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>{{time_start}}&nbsp;&nbsp;&nbsp;&nbsp;{{time_start_suffix}}</span></p>
+        </td>
+        <td width=312 colspan=6
+          style='width:233.7pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:36.9pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>{{time_end}}&nbsp;&nbsp;&nbsp;&nbsp;{{time_end_suffix}}</span></p>
+        </td>
+      </tr>
+      <tr style='height:26pt'>
+        <td width=622 colspan=10
+          style='width:466.5pt;border-top:none;border-left:solid windowtext 1.5pt;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:26pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>食事内容</span></p>
+        </td>
+      </tr>
+      <tr style='page-break-inside:avoid;height:67.0pt'>
+        <td width=62
+          style='width:46.5pt;border-top:none;border-left:solid windowtext 1.5pt;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:67.0pt'>
+          <p class=MsoNormal
+            style='margin-top:0in;margin-right:5.65pt;margin-bottom:0in;margin-left:5.65pt;text-align:center;line-height:normal'>
+            <span>食&nbsp;&nbsp;種</span></p>
+        </td>
+        <td width=560 colspan=9
+          style='width:420.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:67.0pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>{{meal_various}}</span></p>
+        </td>
+      </tr>
+      <tr style='page-break-inside:avoid;height:67.0pt'>
+        <td width=62
+          style='width:46.5pt;border-top:none;border-left:solid windowtext 1.5pt;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:67.0pt'>
+          <p class=MsoNormal
+            style='margin-top:0in;margin-right:5.65pt;margin-bottom:0in;margin-left:5.65pt;text-align:center;line-height:normal'>
+            <span>主&nbsp;&nbsp;食</span></p>
+        </td>
+        <td width=314 colspan=4
+          style='width:235.5pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:67.0pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>{{main_meal}}</span></p>
+        </td>
+        <td width=55 colspan=2
+          style='width:41.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:67.0pt'>
+          <p class=MsoNormal
+            style='margin-top:0in;margin-right:5.65pt;margin-bottom:0in;margin-left:5.65pt;text-align:center;line-height:normal'>
+            <span>朝&nbsp;&nbsp;食</span></p>
+        </td>
+        <td width=191 colspan=3
+          style='width:143.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:67.0pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'><span></span></p>
+        </td>
+      </tr>
+      <tr style='page-break-inside:avoid;height:67.0pt'>
+        <td width=62
+          style='width:46.5pt;border-top:none;border-left:solid windowtext 1.5pt;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:67.0pt'>
+          <p class=MsoNormal
+            style='margin-top:0in;margin-right:5.65pt;margin-bottom:0in;margin-left:5.65pt;text-align:center;line-height:normal'>
+            <span>形&nbsp;&nbsp;態</span></p>
+        </td>
+        <td width=314 colspan=4
+          style='width:235.5pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:67.0pt'>
+          <p class=MsoNormal style='margin-bottom:0in;text-align:center;line-height:normal'>
+            <span>{{form}}</span></p>
+        </td>
+        <td width=55 colspan=2
+          style='width:41.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:67.0pt'>
+          <p class=MsoNormal
+            style='margin-top:0in;margin-right:5.65pt;margin-bottom:0in;margin-left:5.65pt;text-align:center;line-height:normal'>
+            <span>禁止食材</span></p>
+        </td>
+        <td width=191 colspan=3
+          style='width:143.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:67.0pt'>
+          <p class=MsoNormal style='margin-bottom:0in;line-height:normal'><span>{{baned_meal}}</span></p>
+        </td>
+        <td style='height:67.0pt;border:none' width=0 height=89></td>
+      </tr>
+      <tr style='page-break-inside:avoid;height:67.0pt'>
+        <td width=62
+          style='width:46.5pt;border-top:none;border-left:solid windowtext 1.5pt;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:67.0pt'>
+          <p class=MsoNormal
+            style='margin-top:0in;margin-right:5.65pt;margin-bottom:0in;margin-left:5.65pt;text-align:center;line-height:normal'>
+            <span>備考欄</span>
+          </p>
+        </td>
+        <td width=560 colspan=9
+          style='width:420.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.5pt;border-right:solid windowtext 1.5pt;padding:0in 5.4pt 0in 5.4pt;height:67.0pt'>
+          <p class=MsoNormal style='margin-bottom:0in;line-height:normal'><span>{{other}}</span></p>
+        </td>
+      </tr>
+    </table>
+
+    <p class=MsoNormal style='text-align:center'><span>&nbsp;</span></p>
+    <p class=MsoNormal style='text-align:center'><span>特別養護老人朩ー厶夢の箱</span>&nbsp;&nbsp;<span>勝山</span></p>
+
+  </div>
+
+</body>
+
+</html>

@@ -161,7 +161,7 @@ EMAIL_HOST_PASSWORD = 'fM647wKpYK'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = False
 
-SENDER_EMAIL = 'postmaster<feedback@kaigo.r-boot.biz>'
+SENDER_EMAIL = 'Manager<feedback@kaigo.r-boot.biz>'
 
 TESTING = sys.argv[1:2] == ['test']
 

@@ -6,6 +6,9 @@ import json
 import random
 import string
 import uuid
+import argparse
+import json
+import requests
 from io import BytesIO
 
 from django.conf import settings
@@ -17,9 +20,45 @@ from xhtml2pdf import pisa
 from datetime import datetime
 
 from apps.core.queue_system.publisher import BasePublisher
+from oauth2client.service_account import ServiceAccountCredentials
 
+PROJECT_ID = 'r-health-a841d'
+BASE_URL = 'https://fcm.googleapis.com'
+FCM_ENDPOINT = 'v1/projects/' + PROJECT_ID + '/messages:send'
+FCM_URL = BASE_URL + '/' + FCM_ENDPOINT
+SCOPES = ['https://www.googleapis.com/auth/firebase.messaging']
 
-def generate_unique_key(value, length=26):
+# [START retrieve_access_token]
+def _get_access_token():
+    """Retrieve a valid access token that can be used to authorize requests.
+    :return: Access token.
+    """
+    credentials = ServiceAccountCredentials.from_json_keyfile_name(os.path.join(os.path.dirname(__file__), '../../collectstatic/r-health-a841d-firebase-adminsdk-acbyt-d44e6c6e40.json'), SCOPES)
+    access_token_info = credentials.get_access_token()
+    return access_token_info.access_token
+# [END retrieve_access_token]
+
+def _send_fcm_message(fcm_message):
+    """Send HTTP request to FCM with given message.
+    Args:
+    fcm_message: JSON object that will make up the body of the request.
+    """
+    # [START use_access_token]
+    headers = {
+        'Authorization': 'Bearer ' + _get_access_token(),
+        'Content-Type': 'application/json; UTF-8',
+    }
+    # [END use_access_token]
+    resp = requests.post(FCM_URL, data=json.dumps(fcm_message), headers=headers)
+
+    if resp.status_code == 200:
+        print('Message sent to Firebase for delivery, response:')
+        print(resp.text)
+    else:
+        print('Unable to send message to Firebase')
+        print(resp.text)
+
+def generate_unique_key(value, length=8):
     """
     generate key from passed value
     :param value:
@@ -168,13 +207,37 @@ def render_to_pdf_file(template_src, context_dict={}):
     path_pdf = 'collectstatic/pdfs'
     template = get_template(template_src)
     html = template.render(context_dict)
-    result = BytesIO()
     filename = datetime.now().strftime('%Y%m%d%H%M%S') + '.pdf'
     filepath = os.path.join(path_pdf, filename)
     resultFile = open(filepath, "w+b")
-    pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), resultFile)
+    pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), resultFile, encoding='UTF-8')
     resultFile.close()
     return {
         "success": ~pdf.err,
         "filename": filepath
     }
+
+def get_era(year):
+    if year >= 1868 and year < 1912:
+        return '明治'
+    elif year >= 1912 and year < 1926:
+        return '大正'
+    elif year >= 1926 and year < 1989:
+        return '昭和'
+    elif year >= 1989 and year < 2019:
+        return '平成'
+    elif year >= 2019:
+        return '令和'
+
+def get_era_year(year):
+    if year >= 1868 and year < 1912:
+        return year-1867
+    elif year >= 1912 and year < 1926:
+        return year-1911
+    elif year >= 1926 and year < 1989:
+        return year-1925
+    elif year >= 1989 and year < 2019:
+        return year-1988
+    elif year >= 2019:
+        return year-2018
+    
