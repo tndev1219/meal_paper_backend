@@ -117,8 +117,8 @@ def send_notification(sender, instance, created, **kwargs):
                 "Authorization": "key=AAAAzeYmouk:APA91bHEmtQSYKd-9iOl1Q-a4V_yR89GPtRDOK2qyzWrUmJ5vei40-BmU6JCzfWxqety-LVZyDxrqR_GphEILJ_MO3Op1CHW4Tz5IkqAuFkMyZAOnKkeL-kDRjOnndAFtqS_QuZf-ctL"
             }
             notification = {
-                "title": "wow",
-                "body": "new notification",
+                # "title": "wow",
+                "body": "新しい食事箋が登録されました。",
                 "content_available": "true"
             }
 
