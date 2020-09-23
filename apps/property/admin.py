@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from apps.property.models import Agency, Salutarium, Paper
+from apps.property.models import Agency, Salutarium, Paper, DeviceToken
 
 
 @admin.register(Agency)
@@ -45,4 +45,19 @@ class PaperModelAdmin(admin.ModelAdmin):
 
     search_fields = [
         'registerer'
+    ]
+
+@admin.register(DeviceToken)
+class DeviceTokenModelAdmin(admin.ModelAdmin):
+    list_display = [
+        'id',
+        'user',
+        'salutarium',
+        'role',
+        'token'
+    ]
+
+    search_fields = [
+        'salutarium',
+        'role'
     ]
