@@ -564,6 +564,8 @@ class PaperViewSet(ModelViewSet):
             context['baned_meal'] = request.data['baned_meal']
             context['other'] = request.data['other']
 
+            context['salutarium'] = patient.salutarium.name
+
             creation = render_to_pdf_file('mealpaper.html', context)
 
             if creation['success']:
