@@ -36,19 +36,133 @@ from apps.property.models import Agency, Salutarium, Paper, DeviceToken
 from apps.property.serializers import AgencySerializer, SalutariumSerializer, PaperSerializer, DeviceTokenSerializer
 from apps.users.models import User
 
+class AgencyViewSet(ModelViewSet):
+    queryset = Agency.objects.all()
+    permission_classes = (IsAuthenticated, )
+    serializer_class = AgencySerializer
+    http_method_names = ['get', 'post', 'patch', 'delete']
+
+    def get_queryset(self):
+        return Agency.objects.all()
+
+    def get_object(self):
+        queryset = Agency.objects.all()
+        return get_object_or_404(queryset, pk=self.kwargs['pk'])
+
+    def list(self, request, *args, **kwargs):
+        try:
+            queryset = self.get_queryset()
+            serializer = AgencySerializer(queryset, many=True)
+
+            return JsonResponse({
+                'success': True,
+                'message': 'Success',
+                'result': serializer.data
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return JsonResponse({
+                'success': False,
+                'message': 'Error Occured',
+                'result': []
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+    def create(self, request, *args, **kwargs):
+        try:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+
+            user = User(
+                role = 5,
+                email = request.data['email'],
+                username = request.data['email'],
+                password = "password"
+            )
+            user.save()
+            serializer.save()
+            return JsonResponse({
+                'success': True,
+                'message': 'Success',
+                'result': serializer.data
+            }, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            print(e)
+            return JsonResponse({
+                'success': False,
+                'message': 'Error Occured',
+                'result': []
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def update(self, request, *args, **kwargs):
+        try:
+            partial = kwargs.pop('partial', True)
+            instance = self.get_object()
+            serializer = self.get_serializer(
+                instance, data=request.data, partial=partial)
+            serializer.is_valid(raise_exception=True)
+            self.perform_update(serializer)
+
+            return JsonResponse({
+                'success': True,
+                'message': 'Success',
+                'result': serializer.data
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return JsonResponse({
+                'success': False,
+                'message': 'Error Occured',
+                'result': []
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = Agency.objects.get(id=kwargs['pk'])
+            self.perform_destroy(instance)
+            return JsonResponse({
+                'success': True,
+                'message': 'Success',
+                'result': []
+            }, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({
+                'success': False,
+                'message': 'Error Occured!',
+                'result': []
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    @action(methods=['POST'], detail=False, permission_classes=[IsAuthenticated])
+    def multiDel(self, request, *args, **kwargs):
+        try:
+            for id in request.data['ids']:
+                instance = Agency.objects.get(id=id)
+                self.perform_destroy(instance)
+            return JsonResponse({
+                'success': True,
+                'message': 'Success',
+                'result': []
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return JsonResponse({
+                'success': False,
+                'message': 'Error Occured!',
+                'result': []
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 class SalutariumViewSet(ModelViewSet):
     queryset = Salutarium.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = SalutariumSerializer
-    http_method_names = ['get', 'post', 'patch']
+    http_method_names = ['get', 'post', 'patch', 'delete']
 
     def get_queryset(self):
         return Salutarium.objects.all()
 
     def get_object(self):
         queryset = Salutarium.objects.all()
-        return get_object_or_404(queryset, user=self.request.user)
+        return get_object_or_404(queryset, pk=self.kwargs['pk'])
 
     @action(methods=['GET'], detail=False, permission_classes=[], serializer_class=SalutariumSerializer)
     def get(self, request, *args, **kwargs):
@@ -62,6 +176,38 @@ class SalutariumViewSet(ModelViewSet):
                 'result': serializer.data
             }, status=status.HTTP_200_OK)
         except:
+            return JsonResponse({
+                'success': False,
+                'message': 'Error Occured',
+                'result': []
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def list(self, request, *args, **kwargs):
+        try:
+            queryset = self.get_queryset()
+            serializer = SalutariumSerializer(queryset, many=True)
+
+            result = []
+            for data in serializer.data:
+                agency = Agency.objects.get(id=data['agency'])
+                temp = {
+                    'id': data['id'],
+                    'agency': agency.id,
+                    'agency_name': agency.name,
+                    'name': data['name'],
+                    'treasurer_name': data['treasurer_name'],
+                    'contact': data['contact'],
+                    'created_at': data['created_at']
+                }
+                result.append(temp)
+
+            return JsonResponse({
+                'success': True,
+                'message': 'Success',
+                'result': result
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
             return JsonResponse({
                 'success': False,
                 'message': 'Error Occured',
@@ -104,6 +250,41 @@ class SalutariumViewSet(ModelViewSet):
             return JsonResponse({
                 'success': False,
                 'message': 'Error Occured',
+                'result': []
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = Salutarium.objects.get(id=kwargs['pk'])
+            self.perform_destroy(instance)
+            return JsonResponse({
+                'success': True,
+                'message': 'Success',
+                'result': []
+            }, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({
+                'success': False,
+                'message': 'Error Occured!',
+                'result': []
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @action(methods=['POST'], detail=False, permission_classes=[IsAuthenticated])
+    def multiDel(self, request, *args, **kwargs):
+        try:
+            for id in request.data['ids']:
+                instance = Salutarium.objects.get(id=id)
+                self.perform_destroy(instance)
+            return JsonResponse({
+                'success': True,
+                'message': 'Success',
+                'result': []
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return JsonResponse({
+                'success': False,
+                'message': 'Error Occured!',
                 'result': []
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

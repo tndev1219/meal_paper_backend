@@ -153,6 +153,11 @@ class Login(ObtainAuthToken):
             user = serializer.validated_data['user']
             token, created = Token.objects.get_or_create(user=user)
 
+            if user.salutarium:
+                salutarium = user.salutarium.id
+            else:
+                salutarium = None
+
             return JsonResponse({
                 'success': True,
                 'message': 'Success',
@@ -160,7 +165,7 @@ class Login(ObtainAuthToken):
                     'id': user.pk,
                     'email': user.email,
                     'token': token.key,
-                    'salutarium': user.salutarium.id,
+                    'salutarium': salutarium,
                     'name': user.name,
                     'role': user.role,
                     'birthday': user.birthday,
@@ -278,3 +283,39 @@ class UpdateProfileViewSet(ModelViewSet):
                 'message': 'Error Occured',
                 'result': []
             }, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(methods=['GET'], detail=False, permission_classes=[IsAuthenticated])
+    def getAll(self, request, *args, **kwargs):
+        try:
+            users = User.objects.all()
+            result = []
+
+            for user in users:
+                if user.salutarium:
+                    temp = {
+                        'id': user.id,
+                        'salutarium': user.salutarium.id,
+                        'salutarium_name': user.salutarium.name,
+                        'name': user.name,
+                        'email': user.email,
+                        'role': user.role,
+                        'contact': user.contact,
+                        'emergency_contact': user.emergency_contact,
+                        'company': user.company,
+                        'address': user.address,
+                        'created_at': user.created_at
+                    }
+                    result.append(temp)
+
+            return JsonResponse({
+                'success': True,
+                'message': 'Success',
+                'result': result
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return JsonResponse({
+                'success': False,
+                'message': 'Error Occured',
+                'result': []
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

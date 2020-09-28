@@ -9,12 +9,14 @@ from mealpaper.settings.base import SENDER_EMAIL
 
 
 class AgencySerializer(serializers.ModelSerializer):
+    code = serializers.CharField(required=True, allow_null=False)
+    name = serializers.CharField(required=True, allow_null=False)
+    treasurer_name = serializers.CharField(required=True, allow_null=False)
+    contact = serializers.CharField(required=True, allow_null=False)
     
     class Meta:
         model = Agency
-        fields = [
-            'id',            
-        ]
+        fields = '__all__'
 
 class SalutariumSerializer(serializers.ModelSerializer):
     agency = serializers.PrimaryKeyRelatedField(
@@ -33,7 +35,8 @@ class SalutariumSerializer(serializers.ModelSerializer):
             'agency',
             'name',
             'treasurer_name',
-            'contact'
+            'contact',
+            'created_at'
         ]
 
 class PaperSerializer(serializers.ModelSerializer):

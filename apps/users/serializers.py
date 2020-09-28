@@ -87,15 +87,15 @@ class SignUpSerializer(serializers.Serializer):
     password = serializers.CharField(required=True, allow_null=False)
     salutarium = serializers.PrimaryKeyRelatedField(
         queryset=Salutarium.objects.all(),
-        required=True,
-        allow_null=False
+        required=False,
+        allow_null=True
     )
     name = serializers.CharField(required=False, allow_blank=True, allow_null=True)
     birthday = serializers.DateField(required=False, allow_null=True)
-    gender = serializers.BooleanField(required=False)
+    gender = serializers.NullBooleanField(required=False)
     age = serializers.IntegerField(required=False, allow_null=True)
     unit_layer = serializers.IntegerField(required=False, allow_null=True)
-    unit_direction = serializers.BooleanField(required=False)
+    unit_direction = serializers.NullBooleanField(required=False)
     weight = serializers.FloatField(required=False, allow_null=True)
     height = serializers.FloatField(required=False, allow_null=True)
     disease = serializers.CharField(required=False, allow_blank=True, allow_null=True)
@@ -118,8 +118,9 @@ class SignUpSerializer(serializers.Serializer):
         user = User(email=validated_data['email'])
         user.set_password(validated_data['password'])
         user.username = validated_data['email']
-        salutarium = Salutarium(id=validated_data['salutarium'])
-        user.salutarium = salutarium
+        if validated_data['salutarium']:
+            salutarium = Salutarium(id=validated_data['salutarium'])
+            user.salutarium = salutarium
         user.role = validated_data['role']
         user.name = validated_data['name']
         user.birthday = validated_data['birthday']

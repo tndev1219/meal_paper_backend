@@ -21,6 +21,7 @@ class UserModelAdmin(admin.ModelAdmin):
         'id',
         'is_active',
         'name',
+        'role',
         'email'
     ]
 

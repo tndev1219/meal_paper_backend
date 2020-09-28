@@ -7,12 +7,13 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_swagger.views import get_swagger_view
 
 from apps.users.views import UpdateProfileViewSet
-from apps.property.views import SalutariumViewSet, PaperViewSet, DeviceTokenViewSet
+from apps.property.views import AgencyViewSet, SalutariumViewSet, PaperViewSet, DeviceTokenViewSet
 
 schema_view = get_swagger_view(title='Meal Paper API')
 
 router = DefaultRouter()
 router.register(r'update-profile', UpdateProfileViewSet, base_name='update_profile')
+router.register(r'agency', AgencyViewSet, base_name='agency')
 router.register(r'salutarium', SalutariumViewSet, base_name='salutarium')
 router.register(r'paper', PaperViewSet, base_name='paper')
 router.register(r'device-token', DeviceTokenViewSet, base_name='device_token')
