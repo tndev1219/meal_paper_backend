@@ -424,10 +424,6 @@ class PaperViewSet(ModelViewSet):
                 context['patient_gender'] = '女'
             context['patient_age'] = patient.age
             context['patient_unit_layer'] = patient.unit_layer
-            if patient.unit_direction:
-                context['patient_unit_direction'] = '北'
-            else:
-                context['patient_unit_direction'] = '南'
             context['patient_height'] = patient.height
             context['patient_weight'] = patient.weight
             context['patient_disease'] = patient.disease
@@ -625,10 +621,6 @@ class PaperViewSet(ModelViewSet):
                 context['patient_gender'] = '女'
             context['patient_age'] = patient.age
             context['patient_unit_layer'] = patient.unit_layer
-            if patient.unit_direction:
-                context['patient_unit_direction'] = '北'
-            else:
-                context['patient_unit_direction'] = '南'
             context['patient_height'] = patient.height
             context['patient_weight'] = patient.weight
             context['patient_disease'] = patient.disease

@@ -75,12 +75,10 @@ class User(AbstractUser, AbstractBaseModel):
     role = models.IntegerField(choices=ROLE_CHOICES, blank=True, null=True)
 
     # For Patient
-    era_name = models.BooleanField(choices=ERA_CHOICES, default=True, null=True )
     birthday = models.DateField(blank=True, null=True)
     gender = models.BooleanField(choices=GENDER_CHOICES, default=True, null=True)
     age = models.IntegerField(blank=True, null=True)
     unit_layer = models.IntegerField(blank=True, null=True)
-    unit_direction = models.BooleanField(choices=UNIT_DIRECTION_CHOICES, default=True, null=True)
     weight = models.FloatField(blank=True,  null=True)
     height = models.FloatField(blank=True, null=True)
     disease = models.CharField(blank=True, null=True, max_length=255, )

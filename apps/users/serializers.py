@@ -95,7 +95,6 @@ class SignUpSerializer(serializers.Serializer):
     gender = serializers.NullBooleanField(required=False)
     age = serializers.IntegerField(required=False, allow_null=True)
     unit_layer = serializers.IntegerField(required=False, allow_null=True)
-    unit_direction = serializers.NullBooleanField(required=False)
     weight = serializers.FloatField(required=False, allow_null=True)
     height = serializers.FloatField(required=False, allow_null=True)
     disease = serializers.CharField(required=False, allow_blank=True, allow_null=True)
@@ -127,7 +126,6 @@ class SignUpSerializer(serializers.Serializer):
         user.gender = validated_data['gender']
         user.age = validated_data['age']
         user.unit_layer = validated_data['unit_layer']
-        user.unit_direction = validated_data['unit_direction']
         user.weight = validated_data['weight']
         user.height = validated_data['height']
         user.disease = validated_data['disease']

@@ -1,3 +1,5 @@
+import os
+import csv
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.conf import settings
@@ -172,7 +174,6 @@ class Login(ObtainAuthToken):
                     'gender': user.gender,
                     'age': user.age,
                     'unit_layer': user.unit_layer,
-                    'unit_direction': user.unit_direction,
                     'weight': user.weight,
                     'height': user.height,
                     'disease': user.disease,
@@ -317,5 +318,84 @@ class UpdateProfileViewSet(ModelViewSet):
             return JsonResponse({
                 'success': False,
                 'message': 'Error Occured',
+                'result': []
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = User.objects.get(id=kwargs['pk'])
+            self.perform_destroy(instance)
+            return JsonResponse({
+                'success': True,
+                'message': 'Success',
+                'result': []
+            }, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({
+                'success': False,
+                'message': 'Error Occured!',
+                'result': []
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @action(methods=['POST'], detail=False, permission_classes=[IsAuthenticated])
+    def multiDel(self, request, *args, **kwargs):
+        try:
+            for id in request.data['ids']:
+                instance = User.objects.get(id=id)
+                self.perform_destroy(instance)
+            return JsonResponse({
+                'success': True,
+                'message': 'Success',
+                'result': []
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return JsonResponse({
+                'success': False,
+                'message': 'Error Occured!',
+                'result': []
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @action(methods=['POST'], detail=False, permission_classes=[IsAuthenticated])
+    def csvUpload(self, request, *args, **kwargs):
+        try:
+            csv_file = request.data['file']
+            str_file_value = csv_file.read().decode('utf-8')
+            file_t = str_file_value.splitlines()
+            csv_reader = csv.reader(file_t, delimiter=',')
+            line_count = 0
+            result = []
+            for row in csv_reader:
+                if line_count == 0:
+                    line_count += 1
+                else:
+                    patient = {
+                        'email': row[0],
+                        'name': row[1],
+                        'age': row[2],
+                        'birthday': row[3],
+                        'weight': row[5],
+                        'height': row[6],
+                        'unit_layer': row[7],
+                        'disease': row[8],
+                        'contact': row[9],
+                        'money': row[10]
+                    }
+                    if row[4] == '男':
+                        patient['gender'] = True
+                    else:
+                        patient['gender'] = False
+                    result.append(patient)
+
+            return JsonResponse({
+                'success': True,
+                'message': 'Success',
+                'result': result
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return JsonResponse({
+                'success': False,
+                'message': 'Error Occured!',
                 'result': []
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
