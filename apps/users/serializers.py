@@ -94,7 +94,7 @@ class SignUpSerializer(serializers.Serializer):
     birthday = serializers.DateField(required=False, allow_null=True)
     gender = serializers.NullBooleanField(required=False)
     age = serializers.IntegerField(required=False, allow_null=True)
-    unit_layer = serializers.IntegerField(required=False, allow_null=True)
+    unit_layer = serializers.CharField(required=False, allow_null=True)
     weight = serializers.FloatField(required=False, allow_null=True)
     height = serializers.FloatField(required=False, allow_null=True)
     disease = serializers.CharField(required=False, allow_blank=True, allow_null=True)

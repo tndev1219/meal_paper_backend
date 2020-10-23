@@ -78,7 +78,7 @@ class User(AbstractUser, AbstractBaseModel):
     birthday = models.DateField(blank=True, null=True)
     gender = models.BooleanField(choices=GENDER_CHOICES, default=True, null=True)
     age = models.IntegerField(blank=True, null=True)
-    unit_layer = models.IntegerField(blank=True, null=True)
+    unit_layer = models.CharField(blank=True, null=True, max_length=255)
     weight = models.FloatField(blank=True,  null=True)
     height = models.FloatField(blank=True, null=True)
     disease = models.CharField(blank=True, null=True, max_length=255, )
