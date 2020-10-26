@@ -210,7 +210,7 @@ class SignUpAPIView(APIView):
                     'message': 'Success',
                     'result': serializer.data,
                 },
-                status=status.HTTP_201_CREATED,
+                status=status.HTTP_200_OK,
             )
         except Exception as e:
             print('Sign Up Error: ', e)
@@ -371,20 +371,36 @@ class UpdateProfileViewSet(ModelViewSet):
                 else:
                     patient = {
                         'email': row[0],
-                        'name': row[1],
-                        'age': row[2],
-                        'birthday': row[3],
-                        'weight': row[5],
-                        'height': row[6],
-                        'unit_layer': row[7],
-                        'disease': row[8],
-                        'contact': row[9],
-                        'money': row[10]
+                        'name': row[2],
+                        'age': row[3],
+                        'birthday': row[4],
+                        'weight': row[6],
+                        'height': row[7],
+                        'unit_layer': row[8],
+                        'disease': row[9],
+                        'contact': row[10],
+                        'money': row[11],
+                        'emergency_contact': row[12],
+                        'company': row[13],
+                        'address': row[14]
                     }
-                    if row[4] == '男':
+
+                    if row[1] == '入居者':
+                        patient['role'] = 1
+                    elif row[1] == '栄養士':
+                        patient['role'] = 2
+                    elif row[1] == '厨房':
+                        patient['role'] = 3
+                    elif row[1] == '看護婦':
+                        patient['role'] = 4
+
+                    if row[5] == '男':
                         patient['gender'] = True
-                    else:
+                    elif row[5] == '女':
                         patient['gender'] = False
+                    else:
+                        patient['gender'] = row[5]
+
                     result.append(patient)
 
             return JsonResponse({

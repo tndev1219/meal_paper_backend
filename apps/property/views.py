@@ -84,7 +84,7 @@ class AgencyViewSet(ModelViewSet):
                 'success': True,
                 'message': 'Success',
                 'result': serializer.data
-            }, status=status.HTTP_201_CREATED)
+            }, status=status.HTTP_200_OK)
         except Exception as e:
             print(e)
             return JsonResponse({
@@ -223,7 +223,7 @@ class SalutariumViewSet(ModelViewSet):
                 'success': True,
                 'message': 'Success',
                 'result': serializer.data
-            }, status=status.HTTP_201_CREATED)
+            }, status=status.HTTP_200_OK)
         except Exception as e:
             print(e)
             return JsonResponse({
@@ -560,9 +560,9 @@ class PaperViewSet(ModelViewSet):
                     request.user.email
                 )
                 paper = Paper(
-                    patient = User(id=request.data['patient']),
-                    registerer = User(id=request.user.id),
-                    salutarium = Salutarium(id=request.user.salutarium_id),
+                    patient=User(id=request.data['patient']),
+                    registerer=User(id=request.user.id),
+                    salutarium=Salutarium(id=request.user.salutarium_id),
                     file=creation['filename'][13:]
                 )
                 paper.save()
@@ -788,7 +788,7 @@ class DeviceTokenViewSet(ModelViewSet):
                 'success': True,
                 'message': 'Success',
                 'result': serializer.data
-            }, status=status.HTTP_201_CREATED)
+            }, status=status.HTTP_200_OK)
         except Exception as e:
             print(e)
             return JsonResponse({
